@@ -137,7 +137,8 @@ int main(int argc, char** argv)
 #else
     res = tm_preprocess(&mdl, TMPP_UINT2FP01, &in_uint8, &in); 
 #endif
-    TM_DBGT_START();_t0=clock();
+    TM_DBGT_START();
+    _t0 = TM_GET_US();
     res = tm_run(&mdl, &in, outs);
     TM_DBGT("tm_run");
     if(res==TM_OK) parse_output(outs);  

@@ -17,7 +17,10 @@ limitations under the License.
 tm_err_t TM_WEAK tm_load  (tm_mdl_t* mdl, const uint8_t* bin, uint8_t*buf, tm_cb_t cb, tm_mat_t* in)
 {
     tm_mdlbin_t* mdl_bin = (tm_mdlbin_t*)bin;
-    if(mdl_bin->magic != TM_MDL_MAGIC)   return TM_ERR_MAGIC;   //FIXME: big-endian not compatible
+
+    // if(mdl_bin->magic != TM_MDL_MAGIC)   return TM_ERR_MAGIC;   //FIXME: big-endian not compatible
+    if (memcmp(&mdl_bin->magic, TM_MDL_MAGIC_STR, 4) != 0) return TM_ERR_MAGIC;
+
     if(mdl_bin->mdl_type != TM_MDL_TYPE) return TM_ERR_MDLTYPE;
     mdl->b          = mdl_bin;
     mdl->cb         = (void*)cb;
